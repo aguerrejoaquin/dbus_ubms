@@ -40,7 +40,7 @@ class DbusBatteryService:
         self.minUpdateDone = 0
         self.dailyResetDone = 0
         self.lastUpdated = 0
-        self._bat = UbmsBattery(capacity=capacity, voltage=voltage, connection=connection)
+        self._bat = UbmsBattery(capacity=capacity, voltage=voltage, connection=connection, numofmodules=numofmodules, numofstrings=numofstrings)
 
         try:
              self._dbusservice = VeDbusService(servicename+'.socketcan_'+connection+'_di'+str(deviceinstance))
