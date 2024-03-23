@@ -36,11 +36,11 @@ class UbmsBattery(can.Listener):
         2:9
         }
 
-    def __init__(self, voltage, capacity, connection, NofModules, NofStrings):
+    def __init__(self, voltage, capacity, connection):
         self.capacity = capacity
         self.maxChargeVoltage = voltage
-        self.numberOfModules = NofModules 
-        self.numberOfStrings = NofStrings 
+        self.numberOfModules = 8
+        self.numberOfStrings = 2  
         self.modulesInSeries = int(self.numberOfModules / self.numberOfStrings)
         self.cellsPerModule = 4
         self.chargeComplete = 0
