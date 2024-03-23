@@ -1,8 +1,17 @@
 ## dbus_ubms
  CANBUS to dbus bridge for a Valence U-BMS to provide battery monitor service on Victronenergy Venus OS
+ The idea here is to use a CAN-USB converter connected to the USB port of a Raspberry running VenusOS or Victron device directly.
+
+ Note: I have personally used this on a Victron Cervo GX with a USB-Converter connected to a USB port.
+ <img width="342" alt="image" src="https://github.com/aguerrejoaquin/dbus_ubms/assets/132913905/3ff1d289-ec77-4b8e-8e78-0eb32ecf9fd4">
+
 
  Use this code at your own risk.
 ## Installation
+
+Depending if you are using a Raspi or a Victron device (ex: Cerbo GX) you will need to use different codes to install this library. 
+
+## Installation on Raspi
 ```
 with git:
  opkg install git
@@ -13,18 +22,37 @@ with git:
 or download the above projects as archives, copy and unzip to root home
 ```
 
+## Install git on Victron
+
+Install git
+```
+ /opt/victronenergy/swupdate-scripts/resize2fs.sh
+ opkg update
+ opkg install git
+```
+
+Clone library
+```
+ git clone https://github.com/gimx/dbus_ubms.git
+ cd dbus_ubms/ext
+ git clone https://github.com/victronenergy/velib_python.git
+```
+
 ## Preparation on Raspi
 ```
  sudo apt-get install libgtk2.0-dev  libdbus-1-dev libgirepository1.0-dev python-gobject python-can
  sudo pip install dbus-python can pygobject
 ```
 
-## Preparation on CCGX
+## Preparation on Victron
 ```
+ cd
  dbus_ubms/prep_ubms.sh
 ```
 
 ## Run from command line
+Check with the "ifconfig" for the CAN number port (ex: can0). You will need to know the CAN port that your USB converter is assigned. 
+
 ```
  python dbus_ubms.py -i can0 -v 29.0 -c 650
  or
@@ -37,6 +65,7 @@ or download the above projects as archives, copy and unzip to root home
  cp rc.local /data/rc.local
  svc -u /service/dbus-ubms.can0
 ```
+
 
 ## Configuration of U-BMS
 ```
