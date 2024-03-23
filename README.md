@@ -33,7 +33,7 @@ Install git
 
 Clone library
 ```
- git clone https://github.com/gimx/dbus_ubms.git
+ git clone https://github.com/aguerrejoaquin/dbus_ubms.git
  cd dbus_ubms/ext
  git clone https://github.com/victronenergy/velib_python.git
 ```
