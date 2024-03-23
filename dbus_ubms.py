@@ -383,6 +383,8 @@ def main():
     parser.add_argument('-i', '--interface', help='CAN interface')
     parser.add_argument('-c', '--capacity', help='capacity in Ah')
     parser.add_argument('-v', '--voltage', help='maximum charge voltage V')
+    parser.add_argument('-t', '--numofmodules', help='total number of modules')
+    parser.add_argument('-s', '--numofstrings', help='total number or strings')
     parser.add_argument('-p', '--print', help='print only')
 
     args = parser.parse_args()
