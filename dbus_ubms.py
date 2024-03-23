@@ -36,7 +36,7 @@ def handle_changed_setting(setting, oldvalue, newvalue):
 
 
 class DbusBatteryService:
-    def __init__(self, servicename, deviceinstance, voltage, capacity, productname='Valence U-BMS', connection='can0'):
+    def __init__(self, servicename, deviceinstance, voltage, capacity, numofmodules, numofstrings, productname='Valence U-BMS', connection='can0'):
         self.minUpdateDone = 0
         self.dailyResetDone = 0
         self.lastUpdated = 0
