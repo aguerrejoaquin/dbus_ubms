@@ -5,8 +5,17 @@
  Note: I have personally used this on a Victron Cervo GX with a USB-Converter connected to a USB port.
  <img width="342" alt="image" src="https://github.com/aguerrejoaquin/dbus_ubms/assets/132913905/3ff1d289-ec77-4b8e-8e78-0eb32ecf9fd4">
 
+## Preparation in VenusOS
+1) Go to settings --> Services 
+2) Plug-in the USB-CAN converter to the device and check what service appears. (in my case is under VE.CAN port)
+<img width="484" alt="image" src="https://github.com/aguerrejoaquin/dbus_ubms/assets/132913905/de253755-bb9e-47c7-9806-611ae5da5dc5">
 
- Use this code at your own risk.
+3) Get into VE.CAN port to configure as below
+--> VE.CAN port --> CAN bus profile --> "and select CAN-BUS BMS (500kbit/s)"
+ <img width="484" alt="image" src="https://github.com/aguerrejoaquin/dbus_ubms/assets/132913905/0b19cd64-0dac-4470-b194-789076d40edf">
+
+ ## Use this code at your own risk.
+ 
 ## Installation
 
 Depending if you are using a Raspi or a Victron device (ex: Cerbo GX) you will need to use different codes to install this library. 
@@ -52,8 +61,12 @@ Clone library
 
 ## Run from command line
 Check with the "ifconfig" for the CAN number port (ex: can0). You will need to know the CAN port that your USB converter is assigned. 
+-v max voltage of the pack in series
+-c capacity in Ah of the system (only the ones in parallel) 
 
 ```
+ cd dbus_ubms
+
  python dbus_ubms.py -i can0 -v 29.0 -c 650
  or
  nohup python dbus_ubms.py -i can0 -v 29.0 -c 650 &
@@ -61,6 +74,7 @@ Check with the "ifconfig" for the CAN number port (ex: can0). You will need to k
 
 ## Run as a service: 
 ```
+ cd
  ln -s /home/root/dbus_ubms/service /service/dbus-ubms.can0
  cp rc.local /data/rc.local
  svc -u /service/dbus-ubms.can0
