@@ -61,13 +61,13 @@ Clone library
 
 ## Run from command line
 Check with the "ifconfig" for the CAN number port (ex: can0). You will need to know the CAN port that your USB converter is assigned. 
--v max voltage of the pack in series
--c capacity in Ah of the system (only the ones in parallel) 
+-v max voltage of the pack in series. I use (4) 27XP-12v batteries with a max charge voltage of 14V each.
+-c capacity in Ah of the system (only the ones in parallel)
 
 ```
  cd dbus_ubms
 
- python dbus_ubms.py -i can0 -v 29.0 -c 650
+ python dbus_ubms.py -i can0 -v 56.0 -c 288
  or
  nohup python dbus_ubms.py -i can0 -v 29.0 -c 650 &
 ```
@@ -79,10 +79,15 @@ Check with the "ifconfig" for the CAN number port (ex: can0). You will need to k
  cp rc.local /data/rc.local
  svc -u /service/dbus-ubms.can0
 ```
+<img width="482" alt="image" src="https://github.com/aguerrejoaquin/dbus_ubms/assets/132913905/92a5a7d5-18ee-4723-93b2-5928f5e55524">
+
+<img width="487" alt="image" src="https://github.com/aguerrejoaquin/dbus_ubms/assets/132913905/a591bfb3-fa9a-4ba6-88b7-01df24a50bf7">
 
 
 ## Configuration of U-BMS
 ```
+ #It is very important that the U-BMS is configured for the correct number of batteries; otherwise, it will show 0% and alarms.
+
  set SOC calculation to minimum (not average)
  set voltage scaling factor to 1
  set VMU slave mode (error on timeout maybe on or off)
