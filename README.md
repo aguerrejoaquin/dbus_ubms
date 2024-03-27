@@ -59,7 +59,7 @@ Clone library
  dbus_ubms/prep_ubms.sh
 ```
 
-## Run from command line
+## Run from command line (recommended to test this before next steps)
 Check with the "ifconfig" for the CAN number port (ex: can0). You will need to know the CAN port that your USB converter is assigned. 
 -v max voltage of the pack in series. I use (4) 27XP-12v batteries with a max charge voltage of 14V each.
 -c capacity in Ah of the system (only the ones in parallel)
@@ -73,12 +73,26 @@ Check with the "ifconfig" for the CAN number port (ex: can0). You will need to k
 ```
 
 ## Run as a service: 
+NOTE: IF you have your can connection in another port number, you need to change can0 by yours.
+
+Add service files to the service folder and edit your run file with you port, volt, and capacity values
 ```
- cd
- ln -s /home/root/dbus_ubms/service /service/dbus-ubms.can0
- cp rc.local /data/rc.local
+cd
+ln -s /home/root/dbus_ubms/service /service/dbus-ubms.can0
+cd /service/dbus-ubms.can0
+nano run
+```
+
+Edit, save, and exit
+
+Add rc.local file into /data folder. This rc.local file is called after each boot and run all that its inside. Be aware if you already have this file, it will be overwrite. In this case I suggest to edit and add the lines that are in the file to yours.
+after that, you can just reboot or call svc command to run the service.
+```
+ cp /dbus_ubms/rc.local /data/rc.local
  svc -u /service/dbus-ubms.can0
 ```
+NOTE: IF you have your can connection in another port number, you need to change can0 in the rc.local file.
+
 <img width="482" alt="image" src="https://github.com/aguerrejoaquin/dbus_ubms/assets/132913905/92a5a7d5-18ee-4723-93b2-5928f5e55524">
 
 <img width="487" alt="image" src="https://github.com/aguerrejoaquin/dbus_ubms/assets/132913905/a591bfb3-fa9a-4ba6-88b7-01df24a50bf7">
@@ -98,7 +112,14 @@ Check with the "ifconfig" for the CAN number port (ex: can0). You will need to k
  connect +12V for System and Ignition
  in a system with x modules in series and multiple in parallel, module numbers 1 to x have to be assigned to one string, pack voltage calculation depends on this 
 ``` 
-   
+## Additional comments
+You may experience that after activating the can port in the GUI, it will appear a new BMS (ex: LG BMS) with wrong data. This happens because the is a service that runs automatically looking for BMSs once a CAN connection is detected. At this point, you have two options: you can ignore this, or you can disable this service for the port that you will be using for your BMS.
+For example in my case, I used:
+```
+svc -d /service/can-bms.can0
+```
+In this case, I suggest editing your rc.local file and adding that line so it will get disabled on boot.
+
 
 ## Credits
  - Majority of the protocol reverse engineering work was done by @cogito44 http://cogito44.free.fr
