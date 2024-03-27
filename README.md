@@ -113,10 +113,10 @@ NOTE: IF you have your can connection in another port number, you need to change
  in a system with x modules in series and multiple in parallel, module numbers 1 to x have to be assigned to one string, pack voltage calculation depends on this 
 ``` 
 ## Additional comments
-You may experience that after activating the can port in the GUI, it will appear a new BMS (ex: LG BMS) with wrong data. This happens because the is a service that runs automatically looking for BMSs once a CAN connection is detected. At this point, you have two options: you can ignore this, or you can disable this service for the port that you will be using for your BMS.
+You may experience that after activating the can port in the GUI, it will appear a new BMS (ex: LG battery) with wrong data. This happens because the is a service that runs automatically looking for BMSs once a CAN connection is detected. At this point, you have two options: you can ignore this, or you can disable this service for the port that you will be using for your BMS.
 For example in my case, I used:
 ```
-svc -d /service/can-bms.can0
+svc -d /service/can-bus-bms.can0
 ```
 In this case, I suggest editing your rc.local file and adding that line so it will get disabled on boot.
 
